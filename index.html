@@ -1,153 +1,42 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Moje krásná stránka</title>
-
-<style>
-body{
-    margin:0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg,#6a11cb,#2575fc);
-    color:white;
-}
-
-/* navigace */
-nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 40px;
-    background:rgba(0,0,0,0.2);
-}
-
-nav h1{
-    margin:0;
-}
-
-nav a{
-    color:white;
-    text-decoration:none;
-    margin-left:20px;
-    font-weight:bold;
-}
-
-nav a:hover{
-    text-decoration:underline;
-}
-
-/* hlavní sekce */
-.hero{
-    text-align:center;
-    padding:120px 20px;
-}
-
-.hero h2{
-    font-size:48px;
-    margin-bottom:20px;
-}
-
-.hero p{
-    font-size:20px;
-    max-width:600px;
-    margin:auto;
-}
-
-button{
-    margin-top:30px;
-    padding:15px 35px;
-    font-size:18px;
-    border:none;
-    border-radius:30px;
-    background:white;
-    color:#2575fc;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-button:hover{
-    transform:scale(1.05);
-}
-
-/* sekce */
-.section{
-    background:white;
-    color:#333;
-    padding:80px 20px;
-    text-align:center;
-}
-
-.cards{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:30px;
-    margin-top:40px;
-}
-
-.card{
-    background:#f3f3f3;
-    padding:30px;
-    width:250px;
-    border-radius:15px;
-    box-shadow:0 10px 20px rgba(0,0,0,0.1);
-}
-
-/* patička */
-footer{
-    text-align:center;
-    padding:20px;
-    background:#111;
-}
-</style>
-
+    <title>Moje První Webová Hra</title>
+    <style>
+        body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #222; }
+        canvas { border: 2px solid #fff; background: #000; }
+    </style>
 </head>
-
 <body>
 
-<nav>
-<h1>MojeStránka</h1>
-<div>
-<a href="#">Domů</a>
-<a href="#">O mně</a>
-<a href="#">Služby</a>
-<a href="#">Kontakt</a>
-</div>
-</nav>
+<canvas id="gameCanvas" width="400" height="400"></canvas>
 
-<section class="hero">
-<h2>Vítej na mé webové stránce</h2>
-<p>Toto je moderní jednoduchá HTML stránka. Můžeš ji upravit podle sebe a vytvořit vlastní web.</p>
-<button>Klikni sem</button>
-</section>
+<script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
 
-<section class="section">
-<h2>Moje služby</h2>
+    let player = { x: 50, y: 50, size: 30, color: "lime" };
 
-<div class="cards">
-<div class="card">
-<h3>Webdesign</h3>
-<p>Tvorba moderních webových stránek.</p>
-</div>
+    function draw() {
+        // Vymazání plátna
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-<div class="card">
-<h3>Programování</h3>
-<p>HTML, CSS a JavaScript projekty.</p>
-</div>
+        // Vykreslení hráče
+        ctx.fillStyle = player.color;
+        ctx.fillRect(player.x, player.y, player.size, player.size);
 
-<div class="card">
-<h3>Grafika</h3>
-<p>Design a vizuální styl pro web.</p>
-</div>
-</div>
+        requestAnimationFrame(draw);
+    }
 
-</section>
+    // Ovládání šipkami
+    window.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowUp") player.y -= 10;
+        if (e.key === "ArrowDown") player.y += 10;
+        if (e.key === "ArrowLeft") player.x -= 10;
+        if (e.key === "ArrowRight") player.x += 10;
+    });
 
-<footer>
-<p>© 2026 MojeStránka</p>
-</footer>
-
+    draw();
+</script>
 </body>
 </html>
-
